@@ -1,5 +1,6 @@
 function scrollOCD (settings) {
 		"use strict";
+		settings = (typeof settings !== "undefined" ) ? settings : {};
 		var defaults = {
 			'classname':  'ocd',
 			'diff':       200,

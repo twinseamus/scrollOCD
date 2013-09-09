@@ -1,4 +1,5 @@
 function scrollOCD (settings) {
+		"use strict";
 		settings = (typeof settings !== "undefined" ) ? settings : {};
 		var defaults = {
 			'classname':  'ocd',
@@ -18,6 +19,7 @@ function scrollOCD (settings) {
 		}
 
 		function smoothScroll(elemTop,speedInt) {
+			clearInterval(smoothInt);
 			var start = window.pageYOffset,
 					stop = elemTop,
 					distance = stop - start,
@@ -28,11 +30,12 @@ function scrollOCD (settings) {
 		}
 
 		function scrollWindow(incr,dest) {
-			yPos = window.pageYOffset;
-		  window.scrollTo(0,yPos + incr);
-		  if((incr > 0 && yPos + incr >= dest) || (incr < 0 && yPos + incr <= dest)){
-		  	clearInterval(smoothInt);
-		  }
+			var yPos = window.pageYOffset;
+			window.scrollTo(0,yPos + incr);
+			if((incr > 0 && yPos + incr >= dest) || (incr < 0 && yPos + incr <= dest)){
+				window.scrollTo(0,dest);
+				clearInterval(smoothInt);
+			}
 		}
 
 		function excludeElem(elem){

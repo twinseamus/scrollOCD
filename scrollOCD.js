@@ -40,16 +40,6 @@ function scrollOCD (settings) {
 				}
 			}
 		}
-		function init(settings) {
-			var ocd = document.getElementsByClassName(settings.classname),
-					scrollPos = window.pageYOffset;
-			for (var i = ocd.length - 1; i >= 0; i -= 1) {
-				var elemTop = ocd[i].offsetTop;
-				if(Math.abs(scrollPos - elemTop) <= settings.diff){
-					smoothScroll(elemTop,settings.speed);
-				}
-			}
-		}
 		function excludeElem(elem){
 			if(typeof elem[0] === "undefined"){
 				return false;
@@ -97,7 +87,14 @@ function scrollOCD (settings) {
 			window.clearTimeout(scrollInt);
 			scrollInt = window.setTimeout(function(){
 				if(!excludeElem(settings.exclude)){
-					init(settings);
+					var ocd = document.getElementsByClassName(settings.classname),
+							scrollPos = window.pageYOffset;
+					for (var i = ocd.length - 1; i >= 0; i -= 1) {
+						var elemTop = ocd[i].offsetTop;
+						if(Math.abs(scrollPos - elemTop) <= settings.diff){
+							smoothScroll(elemTop,settings.speed);
+						}
+					}
 				}
 			},settings.timeout);
 		}
